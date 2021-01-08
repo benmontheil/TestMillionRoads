@@ -1,0 +1,12 @@
+<button (click)="getEmployees()">List Employees</button>
+
+<h2>Employees</h2>
+
+<div *ngFor="let employee of employees">
+	<h3>
+		<a [title]="employee.name + ' informations'" [routerLink]="['/employees', employee.id]">
+			{{ employee.name }}
+        </a>
+        <button (click)="delete(employee.id)">Delete</button>
+    </h3>
+</div>
