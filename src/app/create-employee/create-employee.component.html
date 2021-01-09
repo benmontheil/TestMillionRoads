@@ -1,1 +1,27 @@
-<p>create-employee works!</p>
+<form [formGroup]="createForm" (ngSubmit)="onSubmit(createForm.value)">
+	<div>
+		<label for="name">Name: </label>
+		<input id="name" type="text" formControlName="name">
+    </div>
+
+	<div>
+		<label for="salary">Salary: </label>
+		<input id="salary" type="number" formControlName="salary">
+    </div>
+
+    <div>
+		<label for="age">Age: </label>
+		<input id="age" type="number" formControlName="age">
+    </div>
+
+    <div>
+		<label for="profile_image">Profile image: </label>
+		<input id="profile_image" type="url" formControlName="profile_image">
+    </div>
+
+	<button class="button" type="submit">Create</button>
+</form>
+
+<p>{{message}}</p>
+
+<button [routerLink]="''">Cancel</button>

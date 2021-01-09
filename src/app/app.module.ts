@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,15 +17,17 @@ import { CreateEmployeeComponent } from './create-employee/create-employee.compo
     AppComponent,
     EmployeeListComponent,
     EmployeeDetailsComponent,
-    CreateEmployeeComponent
+    CreateEmployeeComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     RouterModule.forRoot([
       { path: "", component: EmployeeListComponent },
-      { path: "employees/:employeeId", component: EmployeeDetailsComponent }
+      { path: "employees/:employeeId", component: EmployeeDetailsComponent },
+      { path: "createEmployee", component: CreateEmployeeComponent }
     ])
   ],
   providers: [],

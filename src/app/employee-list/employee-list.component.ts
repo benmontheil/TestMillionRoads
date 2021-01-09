@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 import { DummyService } from '../dummy.service';
 import { Employee } from '../employee';
 
@@ -11,36 +9,33 @@ import { Employee } from '../employee';
 })
 export class EmployeeListComponent implements OnInit {
   employees : Employee[];
-  display : boolean;
+  message : string;
 
   constructor(private dummyService : DummyService) {
-    this.employees = null;
-    this.display = false;
   }
 
   ngOnInit(): void {
+    this.getEmployees();
   }
 
+  // récupère la liste des employés
   getEmployees() {
     this.dummyService.getEmployees()
       .subscribe(
-        data => {
-          this.employees = data;
-          this.display = true;
-          console.log(this.employees);
-        },
-        error => console.log("Erreur")
+        data => {this.employees = data.data}
       );
   }
 
-  delete(employeeId : number){
-    this.dummyService.delete(employeeId)
+  // supprime l'employé grâce au service
+  delete(employee : Employee){
+    this.dummyService.delete(employee.id)
       .subscribe(
         data => {
-          this.employees.splice(employeeId, 1);
-          console.log("Employée supprimé");
-        },
-        error => console.log("Erreur")
+          const index = this.employees.indexOf(employee);
+          this.employees.splice(index, 1);
+          this.message = data.message
+          console.log(data);
+        }
       );
   }
 }
